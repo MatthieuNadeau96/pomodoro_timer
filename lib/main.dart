@@ -1,5 +1,6 @@
 import 'dart:math' as math show pi;
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/header_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,18 +54,52 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 60, vertical: 30.0),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30.0),
           child: Column(
             children: <Widget>[
               SizedBox(height: 30),
-              Text(
-                'Pomodoro',
-                style: TextStyle(
-                  color: themeData.textTheme.title.color,
-                  fontSize: 30,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  HeaderButton(
+                    icon: Icon(Icons.volume_off),
+                  ),
+                  Text(
+                    'Pomodoro',
+                    style: TextStyle(
+                      color: themeData.textTheme.title.color,
+                      fontSize: 30,
+                    ),
+                  ),
+                  HeaderButton(
+                    icon: Icon(Icons.notifications_active),
+                  ),
+                ],
               ),
-              Expanded(
+              // Countdown Timer
+              Container(
+                height: 275,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                  borderRadius: BorderRadius.all(Radius.circular(200)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xffDADCD6),
+                      offset: Offset(6.0, 6.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0,
+                    ),
+                    BoxShadow(
+                      color: Color(0xffffffff),
+                      offset: Offset(-6.0, -6.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0,
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.symmetric(
+                  horizontal: 30,
+                ),
                 child: Align(
                   child: AspectRatio(
                     aspectRatio: 1.0,
@@ -87,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         Stack(
                           children: <Widget>[
                             Positioned(
-                              top: 90.0,
+                              top: 100.0,
                               left: 0,
                               right: 0,
                               bottom: 0,
@@ -104,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           style: TextStyle(
                                               color: themeData
                                                   .textTheme.title.color,
-                                              fontSize: 70),
+                                              fontSize: 60),
                                         );
                                       },
                                     )
