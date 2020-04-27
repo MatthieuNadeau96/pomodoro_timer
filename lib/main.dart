@@ -11,6 +11,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         canvasColor: Color(0xffECF0F3),
         primaryColor: Color(0xff3372F7),
+        textTheme: TextTheme(
+          title: TextStyle(
+            color: Color(0xff2C2C2C),
+          ),
+        ),
         iconTheme: IconThemeData(
           color: Color(0xff7D839A),
         ),
@@ -48,9 +53,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(horizontal: 60, vertical: 30.0),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 30),
+              Text(
+                'Pomodoro',
+                style: TextStyle(
+                  color: themeData.textTheme.title.color,
+                  fontSize: 30,
+                ),
+              ),
               Expanded(
                 child: Align(
                   child: AspectRatio(
@@ -71,36 +84,44 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             },
                           ),
                         ),
-                        Align(
-                          alignment: FractionalOffset.center,
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Count Down',
-                                style: themeData.textTheme.subhead,
+                        Stack(
+                          children: <Widget>[
+                            Positioned(
+                              top: 90.0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              child: Align(
+                                alignment: FractionalOffset.center,
+                                child: Column(
+                                  children: <Widget>[
+                                    AnimatedBuilder(
+                                      animation: controller,
+                                      builder:
+                                          (BuildContext context, Widget child) {
+                                        return Text(
+                                          timerString,
+                                          style: TextStyle(
+                                              color: themeData
+                                                  .textTheme.title.color,
+                                              fontSize: 70),
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
-                              AnimatedBuilder(
-                                animation: controller,
-                                builder: (BuildContext context, Widget child) {
-                                  return Text(
-                                    timerString,
-                                    style: TextStyle(
-                                        color: themeData.primaryColor,
-                                        fontSize: 70),
-                                  );
-                                },
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
+              // Play Puase Button
               Container(
-                // Button
-                margin: EdgeInsets.all(8),
+                margin: EdgeInsets.all(50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
