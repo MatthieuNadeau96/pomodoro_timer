@@ -1,5 +1,6 @@
 import 'dart:math' as math show pi;
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/counters.dart';
 import 'package:pomodoro_timer/header_button.dart';
 
 void main() => runApp(MyApp());
@@ -186,7 +187,23 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 30),
+              Text(
+                'Work',
+                style: TextStyle(fontSize: 24),
+              ),
+              Container(
+                width: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Counters(),
+                    Counters(),
+                    Counters(),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
               // Play Pause Button
               Container(
                 margin: EdgeInsets.all(50),
