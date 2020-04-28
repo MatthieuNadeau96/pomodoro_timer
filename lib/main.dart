@@ -33,6 +33,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   AnimationController controller;
+  bool isPlaying = false;
+  bool muted = false;
+  bool notificationsOn = true;
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
@@ -62,7 +65,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   HeaderButton(
-                    icon: Icon(Icons.volume_off),
+                    toggleHandler: muted,
+                    onPress: () {
+                      setState(() {
+                        muted = !muted;
+                      });
+                    },
+                    icon: muted
+                        ? Icon(
+                            Icons.volume_off,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.volume_up,
+                            size: 20,
+                          ),
                   ),
                   Text(
                     'Pomodoro',
@@ -72,7 +89,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ),
                   ),
                   HeaderButton(
-                    icon: Icon(Icons.notifications_active),
+                    toggleHandler: notificationsOn,
+                    onPress: () {
+                      setState(() {
+                        notificationsOn = !notificationsOn;
+                      });
+                    },
+                    icon: notificationsOn
+                        ? Icon(
+                            Icons.notifications_active,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.notifications_off,
+                            size: 20,
+                          ),
                   ),
                 ],
               ),
@@ -156,14 +187,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
               ),
               SizedBox(height: 60),
-              // Play Puase Button
+              // Play Pause Button
               Container(
                 margin: EdgeInsets.all(50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     GestureDetector(
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 50),
+                        curve: Curves.easeInOut,
                         width: 60,
                         height: 60,
                         child: AnimatedBuilder(
@@ -177,26 +210,41 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           color: themeData.canvasColor,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xffDAE1EB),
-                              offset: Offset(6.0, 6.0),
-                              blurRadius: 10.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: Color(0xffffffff),
-                              offset: Offset(-6.0, -6.0),
-                              blurRadius: 10.0,
-                              spreadRadius: 1.0,
-                            ),
-                          ],
+                          boxShadow: isPlaying
+                              ? [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0, 0),
+                                    blurRadius: 1.0,
+                                    spreadRadius: 0,
+                                  ),
+                                ]
+                              : [
+                                  BoxShadow(
+                                    color: Color(0xffDAE1EB),
+                                    offset: Offset(6.0, 6.0),
+                                    blurRadius: 10.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: Color(0xffffffff),
+                                    offset: Offset(-6.0, -6.0),
+                                    blurRadius: 10.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                ],
                         ),
                       ),
                       onTap: () {
                         if (controller.isAnimating) {
+                          setState(() {
+                            isPlaying = false;
+                          });
                           controller.stop();
                         } else {
+                          setState(() {
+                            isPlaying = true;
+                          });
                           controller.reverse(
                               from: controller.value == 0.0
                                   ? 1.0
