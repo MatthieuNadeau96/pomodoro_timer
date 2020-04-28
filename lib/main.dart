@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
+              SizedBox(height: 60),
               // Countdown Timer
               Container(
                 height: 275,
@@ -84,14 +85,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.all(Radius.circular(200)),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xffDADCD6),
-                      offset: Offset(6.0, 6.0),
+                      color: Color(0xffDAE1EB),
+                      offset: Offset(10.0, 10.0),
                       blurRadius: 10.0,
                       spreadRadius: 1.0,
                     ),
                     BoxShadow(
                       color: Color(0xffffffff),
-                      offset: Offset(-6.0, -6.0),
+                      offset: Offset(-10.0, -10.0),
                       blurRadius: 10.0,
                       spreadRadius: 1.0,
                     ),
@@ -154,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
+              SizedBox(height: 60),
               // Play Puase Button
               Container(
                 margin: EdgeInsets.all(50),
@@ -177,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black45,
+                              color: Color(0xffDAE1EB),
                               offset: Offset(6.0, 6.0),
                               blurRadius: 10.0,
                               spreadRadius: 1.0,
