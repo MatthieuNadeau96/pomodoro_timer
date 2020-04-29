@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int workTime = 1200;
   int breakTime = 300;
   int longBreakTime = 1500;
+  int completedWork = 1;
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
@@ -202,9 +203,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Counters(),
-                    Counters(),
-                    Counters(),
+                    (completedWork >= 1
+                        ? Counters(completed: true)
+                        : Counters(
+                            completed: false,
+                          )),
+                    (completedWork >= 2
+                        ? Counters(completed: true)
+                        : Counters(
+                            completed: false,
+                          )),
+                    (completedWork >= 3
+                        ? Counters(completed: true)
+                        : Counters(
+                            completed: false,
+                          )),
                   ],
                 ),
               ),
