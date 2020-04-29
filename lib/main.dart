@@ -2,6 +2,8 @@ import 'dart:math' as math show pi;
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/counters.dart';
 import 'package:pomodoro_timer/header_button.dart';
+import 'package:pomodoro_timer/playButton.dart';
+import 'package:pomodoro_timer/playButtonPressed.dart';
 
 void main() => runApp(MyApp());
 
@@ -229,47 +231,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     GestureDetector(
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 50),
-                        curve: Curves.easeInOut,
-                        width: 60,
-                        height: 60,
-                        child: AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return Icon(controller.isAnimating
-                                ? Icons.pause
-                                : Icons.play_arrow);
-                          },
-                        ),
-                        decoration: BoxDecoration(
-                          color: themeData.canvasColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          boxShadow: isPlaying
-                              ? [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(0, 0),
-                                    blurRadius: 1.0,
-                                    spreadRadius: 0,
-                                  ),
-                                ]
-                              : [
-                                  BoxShadow(
-                                    color: Color(0xffDAE1EB),
-                                    offset: Offset(6.0, 6.0),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                  BoxShadow(
-                                    color: Color(0xffffffff),
-                                    offset: Offset(-6.0, -6.0),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                ],
-                        ),
-                      ),
+                      child: isPlaying
+                          ? PlayButtonPressed(
+                              icon: Icon(Icons.pause),
+                            )
+                          : PlayButton(
+                              icon: Icon(Icons.play_arrow),
+                            ),
                       onTap: () {
                         if (controller.isAnimating) {
                           setState(() {
