@@ -8,9 +8,7 @@ class PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 50),
-      curve: Curves.easeInOut,
+    return Container(
       width: 60,
       height: 60,
       child: icon,
