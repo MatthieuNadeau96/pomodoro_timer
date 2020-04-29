@@ -38,6 +38,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   bool muted = false;
   bool notificationsOn = true;
 
+  int workTime = 1200;
+  int breakTime = 300;
+  int longBreakTime = 1500;
+
   String get timerString {
     Duration duration = controller.duration * controller.value;
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
@@ -48,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1200),
+      duration: Duration(seconds: longBreakTime),
     );
   }
 
@@ -63,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             children: <Widget>[
               SizedBox(height: 30),
               Row(
+                // Header
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   HeaderButton(
