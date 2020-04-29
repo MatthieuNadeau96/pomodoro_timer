@@ -233,7 +233,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     GestureDetector(
                       child: isPlaying
                           ? PlayButtonPressed(
-                              icon: Icon(Icons.pause),
+                              icon: Icon(
+                                Icons.pause,
+                              ),
                             )
                           : PlayButton(
                               icon: Icon(Icons.play_arrow),

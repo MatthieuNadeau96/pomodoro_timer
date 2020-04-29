@@ -32,20 +32,16 @@ class PlayButtonPressed extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xff8E9093), // 700
-              Color(0xffA5A8AB), // 600
-              Color(0xffBDC0C3), // 500
-              Color(0xffEEF2F4), // 200
-            ],
-            stops: [
-              0,
-              0.1,
-              0.3,
-              1
-            ]),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xff8E9093),
+            Color(0xffA5A8AB),
+            Color(0xffBDC0C3),
+            Color(0xffEEF2F4),
+          ],
+          stops: [0, 0.1, 0.3, 1],
+        ),
       ),
     );
   }
