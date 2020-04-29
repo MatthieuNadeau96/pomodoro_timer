@@ -30,20 +30,16 @@ class PlayButton extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xffEEF2F4),
-              themeData.canvasColor,
-              Color(0xffD4D8DB),
-              Color(0xffBDC0C3),
-            ],
-            stops: [
-              0.1,
-              0.3,
-              0.8,
-              1
-            ]),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffEEF2F4),
+            themeData.canvasColor,
+            Color(0xffD4D8DB),
+            Color(0xffBDC0C3),
+          ],
+          stops: [0.1, 0.3, 0.8, 1],
+        ),
       ),
     );
   }
