@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   AnimationController controller;
   bool isPlaying = false;
   bool muted = false;
-  bool notificationsOn = true;
+  bool notificationsOff = false;
 
   int workTime = 1200;
   int breakTime = 300;
@@ -98,19 +98,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ),
                   ),
                   HeaderButton(
-                    toggleHandler: notificationsOn,
+                    toggleHandler: notificationsOff,
                     onPress: () {
                       setState(() {
-                        notificationsOn = !notificationsOn;
+                        notificationsOff = !notificationsOff;
                       });
                     },
-                    icon: notificationsOn
+                    icon: notificationsOff
                         ? Icon(
-                            Icons.notifications_active,
+                            Icons.notifications_off,
                             size: 20,
                           )
                         : Icon(
-                            Icons.notifications_off,
+                            Icons.notifications_active,
                             size: 20,
                           ),
                   ),
