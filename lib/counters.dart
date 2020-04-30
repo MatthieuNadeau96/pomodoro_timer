@@ -19,13 +19,13 @@ class Counters extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Color(0xffffffff),
-                  offset: Offset(4.0, 4.0),
+                  offset: Offset(2.0, 2.0),
                   blurRadius: 15.0,
                   spreadRadius: 1.0,
                 ),
                 BoxShadow(
                   color: Color(0xffA5A8AB),
-                  offset: Offset(-4.0, -4.0),
+                  offset: Offset(-2.0, -2.0),
                   blurRadius: 15.0,
                   spreadRadius: 1.0,
                 ),

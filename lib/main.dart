@@ -62,216 +62,232 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30.0),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 30),
-              Row(
-                // Header
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  HeaderButton(
-                    toggleHandler: muted,
-                    onPress: () {
-                      setState(() {
-                        muted = !muted;
-                      });
-                    },
-                    icon: muted
-                        ? Icon(
-                            Icons.volume_off,
-                            size: 20,
-                          )
-                        : Icon(
-                            Icons.volume_up,
-                            size: 20,
-                          ),
-                  ),
-                  Text(
-                    'Pomodoro',
-                    style: TextStyle(
-                      color: themeData.textTheme.title.color,
-                      fontSize: 30,
-                    ),
-                  ),
-                  HeaderButton(
-                    toggleHandler: notificationsOff,
-                    onPress: () {
-                      setState(() {
-                        notificationsOff = !notificationsOff;
-                      });
-                    },
-                    icon: notificationsOff
-                        ? Icon(
-                            Icons.notifications_off,
-                            size: 20,
-                          )
-                        : Icon(
-                            Icons.notifications_active,
-                            size: 20,
-                          ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 60),
-              // Countdown Timer
-              Container(
-                height: 275,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).canvasColor,
-                  borderRadius: BorderRadius.all(Radius.circular(200)),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Color(0xffA5A8AB),
-                  //     offset: Offset(4.0, 4.0),
-                  //     blurRadius: 15.0,
-                  //     spreadRadius: 1.0,
-                  //   ),
-                  //   BoxShadow(
-                  //     color: Color(0xffffffff),
-                  //     offset: Offset(-4.0, -4.0),
-                  //     blurRadius: 15.0,
-                  //     spreadRadius: 1.0,
-                  //   ),
-                  // ],
-                  // gradient: LinearGradient(
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  //   colors: [
-                  //     Color(0xffEEF2F4),
-                  //     themeData.canvasColor,
-                  //     Color(0xffD4D8DB),
-                  //     Color(0xffBDC0C3),
-                  //   ],
-                  //   stops: [0.1, 0.3, 0.8, 1],
-                  // ),
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                child: Align(
-                  child: AspectRatio(
-                    aspectRatio: 1.0,
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          child: AnimatedBuilder(
-                            animation: controller,
-                            builder: (BuildContext context, Widget child) {
-                              return CustomPaint(
-                                painter: TimerPainter(
-                                  animation: controller,
-                                  backgroundColor: Colors.white,
-                                  color: themeData.primaryColor,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        Stack(
-                          children: <Widget>[
-                            Positioned(
-                              top: 100.0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              child: Align(
-                                alignment: FractionalOffset.center,
-                                child: Column(
-                                  children: <Widget>[
-                                    AnimatedBuilder(
-                                      animation: controller,
-                                      builder:
-                                          (BuildContext context, Widget child) {
-                                        return Text(
-                                          timerString,
-                                          style: TextStyle(
-                                              color: themeData
-                                                  .textTheme.title.color,
-                                              fontSize: 60),
-                                        );
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 30),
-              Text(
-                'Work',
-                style: TextStyle(fontSize: 24),
-              ),
-              Container(
-                width: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffEEF2F4),
+            themeData.canvasColor,
+            Color(0xffD4D8DB),
+            Color(0xffBDC0C3),
+          ],
+          stops: [0.1, 0.3, 0.8, 1],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Container(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30.0),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 30),
+                Row(
+                  // Header
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    (completedWork >= 1
-                        ? Counters(completed: true)
-                        : Counters(
-                            completed: false,
-                          )),
-                    (completedWork >= 2
-                        ? Counters(completed: true)
-                        : Counters(
-                            completed: false,
-                          )),
-                    (completedWork >= 3
-                        ? Counters(completed: true)
-                        : Counters(
-                            completed: false,
-                          )),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30),
-              // Play Pause Button
-              Container(
-                margin: EdgeInsets.all(50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    GestureDetector(
-                      child: isPlaying
-                          ? PlayButtonPressed(
-                              icon: Icon(
-                                Icons.pause,
-                              ),
-                            )
-                          : PlayButton(
-                              icon: Icon(Icons.play_arrow),
-                            ),
-                      onTap: () {
-                        if (controller.isAnimating) {
-                          setState(() {
-                            isPlaying = false;
-                          });
-                          controller.stop();
-                        } else {
-                          setState(() {
-                            isPlaying = true;
-                          });
-                          controller.reverse(
-                              from: controller.value == 0.0
-                                  ? 1.0
-                                  : controller.value);
-                        }
+                    HeaderButton(
+                      toggleHandler: muted,
+                      onPress: () {
+                        setState(() {
+                          muted = !muted;
+                        });
                       },
+                      icon: muted
+                          ? Icon(
+                              Icons.volume_off,
+                              size: 20,
+                            )
+                          : Icon(
+                              Icons.volume_up,
+                              size: 20,
+                            ),
+                    ),
+                    Text(
+                      'Pomodoro',
+                      style: TextStyle(
+                        color: themeData.textTheme.title.color,
+                        fontSize: 30,
+                      ),
+                    ),
+                    HeaderButton(
+                      toggleHandler: notificationsOff,
+                      onPress: () {
+                        setState(() {
+                          notificationsOff = !notificationsOff;
+                        });
+                      },
+                      icon: notificationsOff
+                          ? Icon(
+                              Icons.notifications_off,
+                              size: 20,
+                            )
+                          : Icon(
+                              Icons.notifications_active,
+                              size: 20,
+                            ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 60),
+                // Countdown Timer
+                Container(
+                  height: 275,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).canvasColor,
+                    borderRadius: BorderRadius.all(Radius.circular(200)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xffA5A8AB),
+                        offset: Offset(4.0, 4.0),
+                        blurRadius: 15.0,
+                        spreadRadius: 1.0,
+                      ),
+                      BoxShadow(
+                        color: Color(0xffffffff),
+                        offset: Offset(-4.0, -4.0),
+                        blurRadius: 15.0,
+                        spreadRadius: 1.0,
+                      ),
+                    ],
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xffEEF2F4),
+                        themeData.canvasColor,
+                        Color(0xffD4D8DB),
+                        Color(0xffBDC0C3),
+                      ],
+                      stops: [0.1, 0.3, 0.8, 1],
+                    ),
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 30,
+                  ),
+                  child: Align(
+                    child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            child: AnimatedBuilder(
+                              animation: controller,
+                              builder: (BuildContext context, Widget child) {
+                                return CustomPaint(
+                                  painter: TimerPainter(
+                                    animation: controller,
+                                    backgroundColor: Colors.white,
+                                    color: themeData.primaryColor,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Stack(
+                            children: <Widget>[
+                              Positioned(
+                                top: 100.0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                child: Align(
+                                  alignment: FractionalOffset.center,
+                                  child: Column(
+                                    children: <Widget>[
+                                      AnimatedBuilder(
+                                        animation: controller,
+                                        builder: (BuildContext context,
+                                            Widget child) {
+                                          return Text(
+                                            timerString,
+                                            style: TextStyle(
+                                                color: themeData
+                                                    .textTheme.title.color,
+                                                fontSize: 60),
+                                          );
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Text(
+                  'Work',
+                  style: TextStyle(fontSize: 24),
+                ),
+                Container(
+                  width: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      (completedWork >= 1
+                          ? Counters(completed: true)
+                          : Counters(
+                              completed: false,
+                            )),
+                      (completedWork >= 2
+                          ? Counters(completed: true)
+                          : Counters(
+                              completed: false,
+                            )),
+                      (completedWork >= 3
+                          ? Counters(completed: true)
+                          : Counters(
+                              completed: false,
+                            )),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                // Play Pause Button
+                Container(
+                  margin: EdgeInsets.all(50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      GestureDetector(
+                        child: isPlaying
+                            ? PlayButtonPressed(
+                                icon: Icon(
+                                  Icons.pause,
+                                ),
+                              )
+                            : PlayButton(
+                                icon: Icon(Icons.play_arrow),
+                              ),
+                        onTap: () {
+                          if (controller.isAnimating) {
+                            setState(() {
+                              isPlaying = false;
+                            });
+                            controller.stop();
+                          } else {
+                            setState(() {
+                              isPlaying = true;
+                            });
+                            controller.reverse(
+                                from: controller.value == 0.0
+                                    ? 1.0
+                                    : controller.value);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
