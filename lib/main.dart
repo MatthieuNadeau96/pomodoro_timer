@@ -251,39 +251,40 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
                 SizedBox(height: 30),
                 // Play Pause Button
-                Container(
-                  margin: EdgeInsets.all(50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      GestureDetector(
-                        child: isPlaying
-                            ? PlayButtonPressed(
-                                icon: Icon(
-                                  Icons.pause,
+                Expanded(
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        GestureDetector(
+                          child: isPlaying
+                              ? PlayButtonPressed(
+                                  icon: Icon(
+                                    Icons.pause,
+                                  ),
+                                )
+                              : PlayButton(
+                                  icon: Icon(Icons.play_arrow),
                                 ),
-                              )
-                            : PlayButton(
-                                icon: Icon(Icons.play_arrow),
-                              ),
-                        onTap: () {
-                          if (controller.isAnimating) {
-                            setState(() {
-                              isPlaying = false;
-                            });
-                            controller.stop();
-                          } else {
-                            setState(() {
-                              isPlaying = true;
-                            });
-                            controller.reverse(
-                                from: controller.value == 0.0
-                                    ? 1.0
-                                    : controller.value);
-                          }
-                        },
-                      ),
-                    ],
+                          onTap: () {
+                            if (controller.isAnimating) {
+                              setState(() {
+                                isPlaying = false;
+                              });
+                              controller.stop();
+                            } else {
+                              setState(() {
+                                isPlaying = true;
+                              });
+                              controller.reverse(
+                                  from: controller.value == 0.0
+                                      ? 1.0
+                                      : controller.value);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
